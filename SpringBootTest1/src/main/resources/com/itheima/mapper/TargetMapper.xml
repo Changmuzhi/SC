@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.TargetMapper">
+    <insert id="insertMsg" parameterType="list">
+        REPLACE into target(name,location,sex,birthday,id_card,address)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name},#{item.location},#{item.sex},#{item.birthday},#{item.id_card},#{item.address})
+        </foreach>
+    </insert>
+    <insert id="insertMoney_card">
+        REPLACE into money(id_card,money_card)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id_card},#{item.money_card})
+        </foreach>
+    </insert>
+
+    <update id="updateFlag">
+        update target set flag = '1' where id_card = #{id_card};
+    </update>
+    <update id="updateFlagMaster">
+        update target set flag = '0';
+    </update>
+    <select id="queryInfo" resultType="com.itheima.pojo.YuanShiShuJu">
+        SELECT
+        	id_card,
+        	name,
+        	location,
+        	sex,
+        	birthday,
+        	address
+        FROM
+        	target
+         where	target.name = #{name}
+        AND target.location = #{location}
+        AND target.sex = #{sex}
+        AND target.flag = '0'
+                ORDER BY target.creat_date DESC
+
+    </select>
+    <select id="queryInfo2" resultType="com.itheima.pojo.YuanShiShuJu">
+        SELECT
+        	id_card,
+        	name,
+        	location,
+        	sex,
+        	birthday,
+        	address
+        FROM
+        	target
+        	where target.name = #{name}
+        AND target.location = #{location}
+        AND target.flag = '0'
+        ORDER BY target.creat_date DESC
+
+    </select>
+    <select id="queryInfo3" resultType="com.itheima.pojo.YuanShiShuJu">
+            SELECT
+        	id_card,
+        	name,
+        	location,
+        	sex,
+        	birthday,
+        	address
+        FROM
+        	target
+        	where target.name = #{name}
+        AND target.sex = #{sex}
+        AND target.flag = '0'
+        ORDER BY target.creat_date DESC
+
+    </select>
+    <select id="queryInfo4" resultType="com.itheima.pojo.YuanShiShuJu">
+        SELECT
+        	id_card,
+        	name,
+        	location,
+        	sex,
+        	birthday,
+        	address
+        FROM
+        	target
+        	where target.name = #{name}
+        AND target.flag = '0'
+        ORDER BY target.creat_date DESC
+
+    </select>
+    <select id="likequeryInfo4" resultType="com.itheima.pojo.YuanShiShuJu">
+                SELECT
+        	id_card,
+        	name,
+        	location,
+        	sex,
+        	birthday,
+        	address
+        FROM
+        	target
+        	where target.name like "%"#{name}"%"
+        AND target.flag = '0'
+        ORDER BY target.creat_date ASC
+    </select>
+    <select id="queryMoney_card" resultType="java.lang.String">
+        select money_card from money where id_card = #{id_card}
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+#DB Configuration:
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/matching?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+#spring集成Mybatis环境
+mybatis:
+  #pojo别名扫描包
+  type-aliases-package: com.itheima.pojo
+  #加载Mybatis映射文件
+  mapper-locations: classpath:mapper/*Mapper.xml
+  #别名
+  #将日志文件生成到系统盘路径
+logging:
+  path: D:\\shangcheng\\log
+  config: classpath:logback-boot.xml
+
+
+
