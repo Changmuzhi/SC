@@ -108,7 +108,12 @@ public class Read {
             YuanShiShuJu temp = info.get(i1);
             //判断身份证号码位数性别
             String id_card = temp.getId_card();
-            int b = Integer.parseInt(id_card.substring(16, 17));//强制类型转换
+            int b;
+            if (id_card.length() >= 17) {
+                b = Integer.parseInt(id_card.substring(16, 17));//强制类型转换
+            }else {
+                break;
+            }
             String a = "";
             //如果是男
             if (b % 2 == 0) {
@@ -175,7 +180,12 @@ public class Read {
                 YuanShiShuJu temp = info.get(i1);
                 //判断身份证号码位数性别
                 String id_card = temp.getId_card();
-                int b = Integer.parseInt(id_card.substring(16, 17));//强制类型转换
+                int b;
+                if (id_card.length() >= 17) {
+                    b = Integer.parseInt(id_card.substring(16, 17));//强制类型转换
+                }else {
+                    break;
+                }
                 String a = "";
                 //如果是男
                 if (b % 2 == 0) {
@@ -208,6 +218,7 @@ public class Read {
                         }
                     }
                 }
+
             }
         } else {
             this.queryInfo4(map, shuJu, excel);
@@ -236,7 +247,9 @@ public class Read {
                 shuJu.setName(yuanShiShuJu.getName());
                 shuJu.setId_card(temp.getId_card());
                 String id_card = temp.getId_card();
+
                 String birthday = id_card.substring(6, 14);
+
                 try {
                     Date date = simpleDateFormat.parse(birthday);
                     birthday = simpleDateFormat1.format(date);
@@ -245,7 +258,12 @@ public class Read {
                     logger.info(e.getMessage());
                 }
                 shuJu.setBirthday(birthday);
-                int b = Integer.parseInt(id_card.substring(16, 17));//强制类型转换
+                int b;
+                if (id_card.length() >= 17) {
+                    b = Integer.parseInt(id_card.substring(16, 17));//强制类型转换
+                }else {
+                    break;
+                }
                 String a = "";
                 //如果是女
                 if (b % 2 == 0) {
